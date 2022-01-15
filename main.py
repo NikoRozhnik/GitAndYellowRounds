@@ -2,9 +2,8 @@ import sys
 import random
 
 
-from PyQt5 import uic
 from PyQt5.QtGui import QPainter, QColor
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
 
 
 class Main(QMainWindow):
@@ -13,7 +12,11 @@ class Main(QMainWindow):
         self.initUI()
 
     def initUI(self):
-        uic.loadUi("UI.ui", self)
+        self.setGeometry(0, 0, 800, 570)
+        self.setWindowTitle("Случайные окружности")
+        self.btn = QPushButton("Окружность", self)
+        self.btn.resize(750, 30)
+        self.btn.move(25, 520)
         self.setFixedSize(800, 570)
         self.do_paint = False
         self.btn.clicked.connect(self.paint)
@@ -30,7 +33,7 @@ class Main(QMainWindow):
         self.repaint()
 
     def draw_ellipse(self, qp):
-        qp.setBrush(QColor("yellow"))
+        qp.setBrush(QColor(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
         w = h = random.randint(50, 350)
         x = random.randint(0, 800)
         y = random.randint(0, 570)
